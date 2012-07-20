@@ -2,6 +2,7 @@
 $:.push File.expand_path("../lib", __FILE__)
 require "frank-cucumber/version"
 require "Rake"
+`git submodule update --init`
 
 Gem::Specification.new do |s|
   s.name        = "frank-cucumber"
