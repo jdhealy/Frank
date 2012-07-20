@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.description = %q{Use cucumber to test native iOS apps via Frank}
 
   git_files = `git ls-files`.split("\n")
-  symbiote_files = FileList["frank-skeleton/**/*"]
+  symbiote_files = FileList["frank-skeleton/**/*", "frank-skeleton/frank_static_resources.bundle/**/*"]
   puts "ªªª", symbiote_files, "ººº"
   s.files         = git_files+symbiote_files
   puts s.files.join("\n")
