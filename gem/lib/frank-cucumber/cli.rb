@@ -154,6 +154,7 @@ module Frank
       dict = { "workspace" => "*.xcworkspace", "project" => "*.xcodeproj" }
     	dict.each do | name, glob |
 	      files = Dir.glob glob
+	    	puts "--#{name} #{files.first}"
 	    	return "--#{name} #{files.first}" if not glob.empty?
     	end
     end
