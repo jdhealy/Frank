@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
 
   git_files = `git ls-files`.split("\n")
   symbiote_files = FileList["frank-skeleton/**/*"]
+  puts "ªªª", symbiote_files, "ººº"
   s.files         = git_files+symbiote_files
   puts s.files.join("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
