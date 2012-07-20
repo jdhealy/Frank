@@ -63,7 +63,7 @@ module Frank
 
       extra_opts = XCODEBUILD_OPTIONS.map{ |o| "-#{o} #{options[o]}" if options[o] }.compact.join(' ')
 
-      run %Q|xcodebuild -xcconfig Frank/frankify.xcconfig clean build #{extra_opts} -configuration Debug -sdk iphonesimulator DEPLOYMENT_LOCATION=YES DSTROOT="#{build_output_dir}" FRANK_LIBRARY_SEARCH_PATHS="\\"#{frank_lib_directory}\\""|
+      run %Q|xcodebuild #{workspace_or_project} -xcconfig Frank/frankify.xcconfig clean build #{extra_opts} -configuration Debug -sdk iphonesimulator DEPLOYMENT_LOCATION=YES DSTROOT="#{build_output_dir}" FRANK_LIBRARY_SEARCH_PATHS="\\"#{frank_lib_directory}\\""|
 
       FileUtils.mv( Dir.glob( "#{build_output_dir}/*.app" ).first, frankified_app_dir )
 
@@ -148,6 +148,14 @@ module Frank
 
     def frankified_app_dir
       File.join( build_output_dir, app_bundle_name )
+    end
+    
+    def workspace_or_project
+      dict = { "workspace" => "*.xcworkspace", "project" => "*.xcodeproj" }
+    	dict.each do | name, glob |
+	      files = Dir.glob glob
+	    	return "--#{name} #{files.first}" if not glob.empty?
+    	end
     end
 
   end
